@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Para sharith</title>
+  <link
+    href="https://fonts.googleapis.com/css2?family=Dancing+Script:wght@700&family=Poppins:wght@400;600;700&display=swap"
+    rel="stylesheet">
+  <link rel="stylesheet" href="css/styles.css">
+</head>
+
+<body>
+  <!-- Música de fondo -->
+  <audio id="bgMusic" loop autoplay>
+    <source src="music/Perfect.mp3" type="audio/mpeg">
+  </audio>
+  <audio id="loveMusic" loop>
+    <source src="music/La-incondicional.mp3" type="audio/mpeg">
+  </audio>
+
+  <!-- Pantalla Juego -->
+  <div class="container" id="gameScreen">
+    <h2>Adivina el número secreto (1 - 100)</h2>
+    <div class="heart-container" id="heartContainer">
+      <img src="img/spiderman.png" class="heart-piece left" id="leftHeart">
+      <img src="img/hellokitty.png" class="heart-piece right" id="rightHeart">
+    </div>
+    <input type="number" id="guess" placeholder="Tu número...">
+    <button id="guessBtn">Adivinar</button>
+    <p id="message"></p>
+  </div>
+
+  <!-- Pantalla Amor -->
+  <div class="love-screen" id="loveScreen">
+    <div class="heart-container">
+      <img src="img/spiderman.png" class="heart-piece left">
+      <img src="img/hellokitty.png" class="heart-piece right">
+    </div>
+    <h1>¡Te Amo!</h1>
+    <img src="img/flores.png" class="flowers" alt="Flores">
+    <button id="showCardBtn">💌 Ver Carta</button>
+  </div>
+
+  <!-- Carta -->
+  <div class="carta-container" id="carta">
+    <div class="hoja">
+      <button class="close-card" id="closeCard">Cerrar ✖</button>
+      <h2>Para Mi Enana❤️</h2><br>
+      <p>
+        Holis mi enana preciosaaaa 🥰💖<br><br>
+        Sabes, en todos estos días me he dado cuenta de tantas cosas bonitas de ti 🌸, y me he dado cuenta que he
+        cometido demasiados errores contigo 😔 y con muchas personas, así que te pido perdón por todo eso...
+        🙏💔<br><br>
+        Pero sabes, también me he dado cuenta lo increíble que eres 🌟, lo que demuestras 💫, lo que puedes y vas a ser
+        en un futuro 🌈, y quiero que lo logres 💪✨. Eres demasiadas cosas tan pero tan bonitas 😍 que si te las dijera
+        no me alcanzaría esta página 📜, ¡pero son demasiadasss...! 💕<br><br>
+        Quiero que me des una oportunidad 🌹, solo una y ya 🙏, como ya lo sé, hay que ir despacio 🐢 y todo poco a poco
+        ⏳. Quiero pasar mucho tiempo a tu lado 🕰️❤️ y hacerte la niña más feliz del mundo 🌍💞. Sí, quizás todo no va a
+        ser felicidad 🌦️ porque hay muchísimas cosas que nos van a cansar 😮‍💨 y aburrir 😩, pero créeme que todo es
+        pasajero 🛤️, todo puede cambiar... 🔄🌤️<br><br>
+        En fin, solo hice esto para ti 📝💌 para que leas esto 📖, para que sepas que no estás sola 🫂 y que siempre me
+        vas a tener a mí 🧑‍🤝‍🧑, a tu mami 🤱 y hasta depronto a mi papá también 👨‍👧...<br><br>
+        No siendo mucho más, recuerda que te amo muchooooo 💘💘, que eres increíble 💎 y que me haces muy feliz siempre,
+        mi Enana ❤️🥹<br><br>
+        ¡Gracias por existir y por hacer mi vida increíble! 🌟🎉💝  
+      </p>
+    </div>
+    <div class="sobre">
+      <div class="solapa"></div>
+      <div class="lado-izq"></div>
+      <div class="lado-der"></div>
+    </div>
+  </div>
+
+  <script src="js/script.js"></script>
+</body>
+
+</html>

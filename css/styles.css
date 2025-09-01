@@ -1,0 +1,149 @@
+* {margin:0;padding:0;box-sizing:border-box;font-family:'Poppins',sans-serif;}
+body {overflow:hidden;height:100vh;display:flex;justify-content:center;align-items:center;background:#fff;position:relative;}
+
+.container {
+  text-align:center;padding:20px;border-radius:15px;background:rgb(234,83,173);
+  box-shadow:0 4px 15px rgba(0,0,0,0.1);z-index:2;transition:opacity 1s ease;border:solid black;
+}
+.container.fade-out {opacity:0;pointer-events:none;}
+
+.love-screen {
+  display:none;opacity:0;width:380px;height:680px;max-width:70%;border-radius:15px;
+  background:rgb(234,83,173);box-shadow:0 4px 15px rgba(0,0,0,0.1);text-align:center;
+  position:fixed;top:50%;left:50%;transform:translate(-50%,-50%);
+  border:solid black;overflow:hidden;
+}
+.love-screen.show {
+  display:flex;flex-direction:column;align-items:center;justify-content:flex-start;
+  padding-top:80px;opacity:1;
+  /* separación sutil entre corazones, texto, flores y botón */
+  gap:20px;
+}
+
+/* --- Corazones (sin cambios) --- */
+.heart-container {position:relative;width:250px;height:250px;margin:30px auto;}
+.heart-piece {position:absolute;top:50%;transform:translateY(-50%);animation:float 3s infinite ease-in-out;transition:left .5s ease,right .5s ease;z-index:5;}
+.heart-piece.left {width:150px;left:0;}
+.heart-piece.right {width:163px;right:0;top:47%;}
+@keyframes float {0%,100%{transform:translateY(-50%) translateX(0);}50%{transform:translateY(-55%) translateX(5px);}}
+
+/* Controles */
+input,button {padding:10px;font-size:16px;margin-top:10px;border:none;border-radius:8px;font-family:'Poppins',sans-serif;}
+button {background:#ff4d6d;color:white;cursor:pointer;transition:.3s;}
+button:hover {background:#e63950;}
+#message {margin-top:10px;font-weight:bold;}
+
+/* Título */
+.love-screen h1 {
+  font-family:'Dancing Script',cursive;font-size:3rem;font-weight:700;color:#ff2d95;
+  text-shadow:2px 2px 8px #ffb3c6,0 0 10px #ff6aa3;margin-bottom:40px;margin-top:40px;
+  animation:moveText 3s ease-in-out infinite alternate;
+}
+@keyframes moveText {
+  0%{transform:translateY(0) scale(1) rotate(-2deg);}
+  25%{transform:translateY(-5px) scale(1.05) rotate(2deg);}
+  50%{transform:translateY(0) scale(1) rotate(-2deg);}
+  75%{transform:translateY(5px) scale(1.05) rotate(2deg);}
+  100%{transform:translateY(0) scale(1) rotate(0);}
+}
+
+/* Flores: animación propia para no subir -50% como los corazones */
+.flowers {width:220px;margin-top:30px;animation:float-soft 4s infinite ease-in-out;}
+@keyframes float-soft {
+  0%,100% { transform: translateY(0); }
+  50%     { transform: translateY(-6px); }
+}
+
+#showCardBtn {animation:shake .5s infinite;margin-bottom:30px;}
+@keyframes shake {
+  0%{transform:translate(1px,1px) rotate(0);}
+  10%{transform:translate(-1px,-2px) rotate(-1deg);}
+  20%{transform:translate(-3px,0) rotate(1deg);}
+  30%{transform:translate(3px,2px) rotate(0);}
+  40%{transform:translate(1px,-1px) rotate(1deg);}
+  50%{transform:translate(-1px,2px) rotate(-1deg);}
+  60%{transform:translate(-3px,1px) rotate(0);}
+  70%{transform:translate(3px,1px) rotate(-1deg);}
+  80%{transform:translate(-1px,-1px) rotate(1deg);}
+  90%{transform:translate(1px,2px) rotate(0);}
+  100%{transform:translate(1px,-2px) rotate(-1deg);}
+}
+
+/* --- Carta tipo sobre con 3D y solapa --- */
+.carta-container {
+  position:fixed;bottom:60px;left:50%;transform:translateX(-50%);
+  width:320px;height:260px;display:none;z-index:999;perspective:1200px;
+  animation:subtleShake 3s infinite ease-in-out;
+}
+@keyframes subtleShake {
+  0%,100%{transform:translateX(-50%) rotate(0);}
+  25%{transform:translateX(-50%) rotate(-1deg);}
+  75%{transform:translateX(-50%) rotate(1deg);}
+}
+
+.hoja {
+  position:absolute;bottom:0;left:50%;transform:translateX(-50%) translateY(100%);
+  width:280px;max-height:220px;overflow-y:auto;background:#fff0f5;
+  border:2px solid #e91e63;border-radius:10px;box-shadow:0 8px 20px rgba(0,0,0,0.3);
+  padding:20px;text-align:center;opacity:0;z-index:5;
+}
+.hoja h2{color:#ff2d95;margin-bottom:12px;font-family:'Dancing Script',cursive;}
+
+.sobre {
+  position:absolute;bottom:0;left:50%;transform:translateX(-50%);
+  width:320px;height:200px;background:#ff6699;border-radius:4px;overflow:hidden;
+  z-index:3;transform-style:preserve-3d;box-shadow:0 5px 20px rgba(0,0,0,0.2);
+}
+.sobre .solapa {
+  position:absolute;top:-100px;left:0;width:100%;height:100px;background:#ff3366;
+  clip-path:polygon(0 100%,50% 0,100% 100%);transform-origin:bottom;
+  transform:rotateX(0deg);transition:transform 1s ease-in-out;
+  box-shadow:inset 0 -8px 15px rgba(0,0,0,0.25);z-index:4;
+}
+.sobre .lado-izq { position:absolute;left:0;bottom:0;width:50%;height:100%;background:#ff4d88;clip-path:polygon(0 100%,0 0,50% 50%);z-index:2; }
+.sobre .lado-der { position:absolute;right:0;bottom:0;width:50%;height:100%;background:#ff4d88;clip-path:polygon(100% 100%,100% 0,50% 50%);z-index:2; }
+
+.carta-container.open {display:block;}
+.carta-container.open .sobre .solapa {transform:rotateX(-180deg);}
+.carta-container.open .hoja {transform:translateX(-50%) translateY(-140%);opacity:1;animation:bounceUp 1s ease forwards;}
+.carta-container.closing .sobre .solapa {transform:rotateX(0deg);}
+.carta-container.closing .hoja {transform:translateX(-50%) translateY(0);opacity:0;animation:bounceDown 1s ease forwards;}
+@keyframes bounceUp {
+  0%{transform:translateX(-50%) translateY(100%);opacity:0;}
+  60%{transform:translateX(-50%) translateY(-150%);opacity:1;}
+  100%{transform:translateX(-50%) translateY(-140%);opacity:1;}
+}
+@keyframes bounceDown {
+  0%{transform:translateX(-50%) translateY(-140%);opacity:1;}
+  40%{transform:translateX(-50%) translateY(-160%);opacity:1;}
+  100%{transform:translateX(-50%) translateY(0);opacity:0;}
+}
+
+.close-card {
+  position:sticky;top:0;right:0;display:block;background:#ff4d6d;color:white;
+  border:none;border-radius:10px;padding:6px 14px;margin-left:auto;cursor:pointer;
+  font-size:14px;z-index:1000;
+}
+
+/* ======= CORAZONES FLOTANTES ======= */
+.heart {
+  position:absolute;font-size:24px;color:#ff4d6d;animation:fall linear forwards;z-index:1;
+  text-shadow: 0 0 6px #ff99aa, 0 0 12px #ff3366;
+}
+@keyframes fall {
+  0%{transform:translateY(-30px) rotate(0);opacity:1;}
+  100%{transform:translateY(500px) rotate(360deg);opacity:0;}
+}
+
+/* ======= RESPONSIVE ======= */
+@media (max-width:600px){
+  .love-screen{width:95%; height:90%;}
+  .love-screen h1{font-size:2.2rem; margin-bottom:30px;}
+  .flowers{width:140px; margin-top:20px;}
+  .carta-container{width:260px; height:220px;}
+  .hoja{width:230px; max-height:180px; font-size:14px; padding:12px;}
+  .hoja h2{font-size:18px;}
+  .hoja p{font-size:14px;}
+  .sobre{width:260px; height:160px;}
+  .close-card{font-size:12px; padding:5px 10px;}
+}
